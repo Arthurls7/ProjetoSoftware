@@ -11,7 +11,6 @@ public class Menu {
     Scanner scan = new Scanner(System.in).useDelimiter("\n");
 
     public void startMenu(ArrayList<Account> users, ArrayList<Community> communities, Feed posts){
-
         boolean isLogged;
         do {
             System.out.println("Options: ");
