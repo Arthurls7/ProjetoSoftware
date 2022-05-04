@@ -1,7 +1,10 @@
 # ProjetoSoftware
 Disciplina Programação 2 / Projeto de Software em Java
 
-Funções para considerar:
+Aplicado: herança, polimorfismo e encapsulamento.
+
+
+Funções para considerar para as 4 presenciais:
 
 1 Criação de Conta
 
