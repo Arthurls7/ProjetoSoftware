@@ -6,15 +6,6 @@ public class Menu {
     String choice;
 
     public void menu(){
-
-        Account preset = new Account("Arthur7", "123", "Arthur", "Tutu", "Test1");
-        ops.users.add(preset);
-        ops.users.get(0).getCommMember().add("zap");
-
-        preset = new Account("Teste", "123", "Qualquer", "Coisa", "Test2");
-        ops.users.add(preset);
-        ops.users.get(1).getCommMember().add("zap");
-
         while(true) {
             System.out.println("Options: ");
             System.out.println("a: New Account");
@@ -37,23 +28,24 @@ public class Menu {
                     System.out.println("Bye bye :)");
                     return;
                 default:
-                    System.out.println("Unexpected value2:" + choice);
+                    System.out.println("Unexpected value:" + choice);
                     break;
             }
         }
+    }
+
+    void enterFunc(){
+        System.out.println("\nPress enter to proceed to menu");
+        scan.nextLine();
     }
 
     public void accountMenu(String login){
         Account actualAcc = ops.findAcc(login);
         int loop = 0;
 
-
         while(!choice.equals("z")){
 
-            if(loop != 0){
-                System.out.println("\nPress enter to proceed to menu");
-                scan.next();
-            }
+            if(loop != 0) enterFunc();
 
             System.out.println("\nWelcome " + actualAcc.getName());
             System.out.println("\n** ACCOUNT AREA **");
@@ -69,7 +61,6 @@ public class Menu {
             System.out.println("k: Sent msg to comm | l: See community msg's");
             System.out.println("m: Manage community");
 
-            //feed
             System.out.println("\n** FEED SECTION **");
             System.out.println("n: Post in feed | o: See feed");
 

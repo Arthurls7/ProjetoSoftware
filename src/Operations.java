@@ -13,10 +13,6 @@ public class Operations implements Messages{
         this.users = new ArrayList<>();
         this.communities = new ArrayList<>();
         this.feed = new ArrayList<>();
-        Community automatic = new Community("zap", "test", "Arthur");
-        automatic.getMemberList().add("Pri");
-        automatic.getMemberList().add("Arthur");
-        communities.add(automatic);
     }
 
     //Account area
@@ -34,7 +30,6 @@ public class Operations implements Messages{
         newAcc = findAcc(login);
         if(newAcc != null) return false;
 
-        //Receiving data
         newAcc = new Account();
         newAcc.setLogin(login);
 
@@ -51,6 +46,7 @@ public class Operations implements Messages{
         newAcc.setDescription(scan.next());
 
         users.add(newAcc);
+        System.out.println();
         return true;
     }
 
@@ -552,7 +548,6 @@ public class Operations implements Messages{
         System.out.println("My communities list:");
         for (String s : actualAcc.getCommMember()) System.out.println("Member of: " + s);
     }
-
 
     //Feed
     public void postFeed(String login){
