@@ -1,9 +1,9 @@
 # ProjetoSoftware
 Disciplina Programação 2 / Projeto de Software em Java
 
-Aplicado: herança, polimorfismo e encapsulamento.
+Aplicado conceitos de O.O.
 
-
+----------------------------------
 Funções para considerar para as 4 presenciais:
 
 1 Criação de Conta
