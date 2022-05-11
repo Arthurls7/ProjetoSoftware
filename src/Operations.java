@@ -82,11 +82,21 @@ public class Operations implements Messages{
                 String newValue = scan.next();
 
                 switch (opt) {
-                    case "password" -> actualAcc.setPassword(newValue);
-                    case "name" -> actualAcc.setName(newValue);
-                    case "nickname" -> actualAcc.setNickname(newValue);
-                    case "description" -> actualAcc.setDescription(newValue);
-                    default -> System.out.println("Attribute unmodifiable or nonexistent");
+                    case "password": 
+                        actualAcc.setPassword(newValue);
+                        break;
+                    case "name":
+                        actualAcc.setName(newValue);
+                        break;
+                    case "nickname":
+                        actualAcc.setNickname(newValue);
+                        break;
+                    case "description":
+                        actualAcc.setDescription(newValue);
+                        break;
+                    default: 
+                        System.out.println("Attribute unmodifiable or nonexistent");
+                        break;
                 }
             }
         }

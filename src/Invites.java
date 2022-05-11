@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Invites {
@@ -6,13 +5,11 @@ public class Invites {
     protected ArrayList<String> inviteRec = new ArrayList<String>();
 
     public boolean hasInvSent(){
-        for(String name : inviteSent) return true;
-        return false;
+        return inviteSent.isEmpty();
     }
 
     public boolean hasInvRec(){
-        for(String name : inviteRec) return true;
-        return false;
+        return inviteRec.isEmpty();
     }
 
     public void showInvSent(){

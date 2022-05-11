@@ -34,19 +34,10 @@ public class Menu {
         }
     }
 
-    void enterFunc(){
-        System.out.println("\nPress enter to proceed to menu");
-        scan.nextLine();
-    }
-
     public void accountMenu(String login){
         Account actualAcc = ops.findAcc(login);
-        int loop = 0;
 
         while(!choice.equals("z")){
-
-            if(loop != 0) enterFunc();
-
             System.out.println("\nWelcome " + actualAcc.getName());
             System.out.println("\n** ACCOUNT AREA **");
             System.out.println("a: Edit info    | b: Show data");
@@ -69,7 +60,6 @@ public class Menu {
 
             System.out.print("Your choice: "); choice = scan.next();
             System.out.println("-----------");
-            loop = 1;
 
             switch (choice){
                 case "a":
