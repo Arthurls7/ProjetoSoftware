@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Menu {
-    Scanner scan = new Scanner(System.in).useDelimiter("\n");
+    Scanner scan = new Scanner(System.in);
     Operations ops = new Operations();
     String choice;
 
@@ -84,7 +84,7 @@ public class Menu {
                     actualAcc.invites.hasInvites();
                     break;
                 case "h":
-                    if(!actualAcc.invites.hasInvites()) break;
+                    if(actualAcc.invites.hasInvites()) break;
                     System.out.println("a -> to manage sent, b -> to manage received");
                     choice = scan.next();
                     if(choice.equals("a")) ops.manageSent(login);

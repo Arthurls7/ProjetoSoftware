@@ -5,11 +5,11 @@ public class Invites {
     protected ArrayList<String> inviteRec = new ArrayList<String>();
 
     public boolean hasInvSent(){
-        return inviteSent.isEmpty();
+        return !inviteSent.isEmpty();
     }
 
     public boolean hasInvRec(){
-        return inviteRec.isEmpty();
+        return !inviteRec.isEmpty();
     }
 
     public void showInvSent(){

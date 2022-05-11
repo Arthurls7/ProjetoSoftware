@@ -120,7 +120,16 @@ public class Operations implements Messages{
             Community loop = findComm(s);
             if(loop.getHost().equals(login)) System.out.println("Host of: " + s);
             else System.out.println("Member of: " + s);
+
+            for(Message msg : loop.getMessages()){
+                if(msg.getSender().equals(login)) System.out.println("Message to comm" + loop.getName() + ": " + msg.getMessage());
+            }
         }
+        for(FeedMessage actual : feed){
+            if(actual.getSender().equals(login)) System.out.println("Feed post: " + actual.getMessage());;
+        }
+
+        seeMsg(login);
     }
 
     //Friend Area
@@ -614,8 +623,21 @@ public class Operations implements Messages{
                     actualComm.getMessages().removeIf(message -> message.getSender().equals(login));
                 }
             }
-
         }
+
+        //Private messages
+        for(PrivateMessage excludeMsg : actualAcc.getMessages()){
+            Account friend;
+            if(excludeMsg.getSender().equals(login)){
+                friend = findAcc(excludeMsg.getReceiver());
+                friend.getMessages().removeIf(message -> message.getSender().equals(login));
+            }
+            else{
+                friend = findAcc(excludeMsg.getSender());
+                friend.getMessages().removeIf(message -> message.getReceiver().equals(login));
+            }
+        }
+
 
         //FriendList
         for (Account actualFriend : users) actualFriend.getFriendList().remove(login);
