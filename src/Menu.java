@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Menu {
-    Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in).useDelimiter("\n");
     Operations ops = new Operations();
     String choice;
 
-    public void menu(){
+    public void menu() throws invalidFormatEx{
         while(true) {
             System.out.println("Options: ");
             System.out.println("a: New Account");
@@ -17,7 +17,6 @@ public class Menu {
             switch (choice) {
                 case "a":
                     if (ops.createAcc()) System.out.println("User created");
-                    else System.out.println("Login already exists");
                     break;
                 case "b":
                     System.out.print("Insert login: ");
@@ -34,7 +33,7 @@ public class Menu {
         }
     }
 
-    public void accountMenu(String login){
+    public void accountMenu(String login) throws invalidFormatEx{
         Account actualAcc = ops.findAcc(login);
 
         while(!choice.equals("z")){
@@ -84,7 +83,7 @@ public class Menu {
                     actualAcc.invites.hasInvites();
                     break;
                 case "h":
-                    if(actualAcc.invites.hasInvites()) break;
+                    if(!actualAcc.invites.hasInvites()) break;
                     System.out.println("a -> to manage sent, b -> to manage received");
                     choice = scan.next();
                     if(choice.equals("a")) ops.manageSent(login);
