@@ -12,6 +12,13 @@ public class Operations implements Messages{
         this.users = new ArrayList<>();
         this.communities = new ArrayList<>();
         this.feed = new ArrayList<>();
+
+        Account acc = new Account("arthur", "123", "123", "123", "123");
+        users.add(acc);
+        acc = new Account("arthur2", "123", "123", "123", "123");
+        users.add(acc);
+        acc = new Account("arthur3", "123", "123", "123", "123");
+        users.add(acc);
     }
 
     //Account area
@@ -22,20 +29,41 @@ public class Operations implements Messages{
     }
     
     public boolean checkSpaces(String spaces) {
-    	if(spaces.contains("  ")) return true;
-    	return false;
+        return spaces.contains("  ");
     }
 
-    public boolean createAcc() throws invalidFormatEx{
+    public boolean checkRegex(String attribute, String input){
+        String regex;
+        switch (attribute){
+            case "login":
+                regex = "^[A-Za-z][A-Za-z0-9_]{6,20}$";
+                return input.matches(regex);
+            case "password":
+                return input.length() >= 6 && input.length() <= 20;
+            case "name":
+                regex = "^[a-zA-z ]{6,30}$";
+                return input.matches(regex) && !checkSpaces(input);
+            case "nickname":
+                regex = "^[A-Za-z][A-Za-z0-9 ]{6,20}$";
+                return input.matches(regex) && !checkSpaces(input);
+            case "description":
+                return input.length() >= 6 && input.length() <= 40;
+            case "message":
+                return input.length() >= 1 && input.length() <= 100;
+            default:
+                System.out.println("Invalid");
+                return true;
+        }
+    }
+
+    public boolean createAcc(){
     	Account newAcc;
         
         try {
-        	System.out.print("Insert login: ");
+            System.out.print("Insert login (Len 6-20, No especial chars, only underscore): ");
             String input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad login");
-            }
-            
+            if(!checkRegex("login", input)) throw new invalidFormatEx("Bad login");
+
             //Validating account
             newAcc = findAcc(input);
             if(newAcc != null) {
@@ -46,38 +74,31 @@ public class Operations implements Messages{
             newAcc = new Account();
             newAcc.setLogin(input);
 
-            System.out.print("Insert password: ");
+            System.out.print("Insert password (Len 6-20): ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad password");
-            }
-            
+
+            if(!checkRegex("password", input)) throw new invalidFormatEx("Bad password");
             newAcc.setPassword(input);
-            
-            System.out.print("Insert name: ");
+
+            System.out.print("Insert name (Len 6-30, No especial chars, No especial chars, only spaces): ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad name");
-            }
+
+            if(!checkRegex("name", input)) throw new invalidFormatEx("Bad name");
             newAcc.setName(input);
 
-            System.out.print("Insert nickname: ");
+            System.out.print("Insert nickname (Len 6-20, No especial chars, only spaces): ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad nickname");
-            }
+
+            if(!checkRegex("nickname", input)) throw new invalidFormatEx("Bad nickname");
             newAcc.setNickname(input);
             
-            System.out.print("Insert description: ");
+            System.out.print("Insert description (Len 6-40, All chars allowed): ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad name");
-            }
+
+            if(!checkRegex("description", input)) throw new invalidFormatEx("Bad description");
             newAcc.setDescription(input);
 
-            
         } catch(invalidFormatEx e) {
-        	System.out.println("Be aware os your inputs");
         	return false;
         }
         
@@ -105,7 +126,7 @@ public class Operations implements Messages{
         }
     }
 
-    public void modifyAccount(String login) throws invalidFormatEx{
+    public void modifyAccount(String login){
     	System.out.print("password\nname\nnickname\ndescription\n");
     	System.out.println("What you want modify: ");
         String opt = scan.next();
@@ -114,40 +135,26 @@ public class Operations implements Messages{
         	System.out.println("Attribute unmodifiable or nonexistent");
         	return;
         }
-        
+
         try {
         	Account actualAcc = findAcc(login);
             System.out.println("Insert new value: ");
             String newValue = scan.next();
-            
-            if(newValue.isEmpty() || newValue.length() < 4 || newValue.length() > 20 || checkSpaces(newValue)) {
-            	throw new invalidFormatEx("Bad value");
-            }
-            
+
+            if(!checkRegex(opt, newValue)) throw new invalidFormatEx("Bad input");
+
             switch (opt) {
-                case "password": 
-                    actualAcc.setPassword(newValue);
-                    break;
-                case "name":
-                    actualAcc.setName(newValue);
-                    break;
-                case "nickname":
-                    actualAcc.setNickname(newValue);
-                    break;
-                case "description":
-                    actualAcc.setDescription(newValue);
-                    break;
-                default: 
-                    System.out.println("Attribute unmodifiable or nonexistent");
-                    break;
+                case "password" -> actualAcc.setPassword(newValue);
+                case "name" -> actualAcc.setName(newValue);
+                case "nickname" -> actualAcc.setNickname(newValue);
+                case "description" -> actualAcc.setDescription(newValue);
+                default -> System.out.println("Attribute unmodifiable or nonexistent");
             }
             
         } catch(Exception e) {
-        	System.out.println("Be aware of your inputs");
-        	return;
+            return;
         }
-        
-        
+
         System.out.println("Account modified");
     }
 
@@ -173,7 +180,7 @@ public class Operations implements Messages{
             }
         }
         for(FeedMessage actual : feed){
-            if(actual.getSender().equals(login)) System.out.println("Feed post: " + actual.getMessage());;
+            if(actual.getSender().equals(login)) System.out.println("Feed post: " + actual.getMessage());
         }
 
         seeMsg(login);
@@ -369,25 +376,30 @@ public class Operations implements Messages{
             return;
         }
 
-        System.out.println("Put your message: ");
-        String msgInput = scan.next();
-        PrivateMessage message = new PrivateMessage(sender, msgInput, receiverAcc.getLogin());
-        receiverAcc.getMessages().add(message);
-        senderAcc.getMessages().add(message);
-        System.out.println("Message sent");
+        try{
+            System.out.println("Put your message (Len 1-100, all chars allowed): ");
+            String msgInput = scan.next();
+            if(!checkRegex("message", msgInput)) throw new invalidFormatEx("Bad msg input");
+
+            PrivateMessage message = new PrivateMessage(sender, msgInput, receiverAcc.getLogin());
+            receiverAcc.getMessages().add(message);
+            senderAcc.getMessages().add(message);
+            System.out.println("Message sent");
+        } catch(Exception e){
+            System.out.println("Returning");
+        }
     }
 
     //Community area
-    public void createComm(String login) throws invalidFormatEx{
+    public void createComm(String login){
     	Community newComm = new Community();
     	
     	try{
             String input;
-            System.out.println("Give a name to the community: ");
+            System.out.println("Give a name to the community (Len 6-30, No especial chars, No especial chars, only spaces):: ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad name");
-            }
+
+            if(!checkRegex("name", input)) throw new invalidFormatEx("Bad name");
             newComm.setName(input);
             
             for(Community comm : communities){
@@ -397,19 +409,14 @@ public class Operations implements Messages{
                 }
             }
             
-            System.out.println("Give a description to the community: ");
+            System.out.println("Give a description to the community (Len 6-40, All chars allowed):: ");
             input = scan.next();
-            if(input.isEmpty() || input.length() < 4 || input.length() > 20 || checkSpaces(input)) {
-            	throw new invalidFormatEx("Bad name");
-            }
+            if(!checkRegex("description", input)) throw new invalidFormatEx("Bad description");
             newComm.setDescription(input);
         } catch(invalidFormatEx e) {
-        	System.out.println("Name must have len > 4 and <= 20 and not duplicated spaces and description has a 40 char limit");
-        	System.out.println("Community not created");
         	return;
         }
-    	
-    	
+
         try {
         	newComm.setHost(login);
             newComm.getMemberList().add(login);
@@ -578,7 +585,7 @@ public class Operations implements Messages{
     }
 
     public void seeMsgComm(String login){
-        System.out.println("Insert comm name you want to see msgs");
+        System.out.println("Insert comm name you want to see messages");
         Community comm = findComm(scan.next());
         if(comm == null){
             System.out.println("Nonexistent comm");
@@ -638,19 +645,24 @@ public class Operations implements Messages{
     }
 
     //Feed
-    public void postFeed(String login){
-        System.out.println("Insert your scrap:");
-        String scrap = scan.next();
+    public void postFeed(String login) throws invalidFormatEx {
+        try{
+            System.out.println("Insert your scrap (Len 1-100):");
+            String scrap = scan.next();
 
-        System.out.println("Is public? y -> yes, any other key -> no");
-        String inputPublic = scan.next();
-        boolean isPublic;
-        isPublic = inputPublic.equals("y");
+            if(!checkRegex("message", scrap)) throw new invalidFormatEx("Bad scrap");
 
-        FeedMessage newPost = new FeedMessage(login, scrap, isPublic);
+            System.out.println("Is public? y -> yes, any other key -> no");
+            String inputPublic = scan.next();
+            boolean isPublic;
+            isPublic = inputPublic.equals("y");
+            FeedMessage newPost = new FeedMessage(login, scrap, isPublic);
 
-        feed.add(newPost);
-        System.out.println("Successful post");
+            feed.add(newPost);
+            System.out.println("Successful post");
+        } catch(Exception e){
+            System.out.println("Returning");
+        }
     }
 
     public void seeFeed(String login){
@@ -674,9 +686,9 @@ public class Operations implements Messages{
         Account actualAcc = findAcc(login);
 
         //Comm remove ok
-        Iterator<Community> comms = communities.iterator();
-        while(comms.hasNext()){
-            Community actualComm = comms.next();
+        Iterator<Community> commIterator = communities.iterator();
+        while(commIterator.hasNext()){
+            Community actualComm = commIterator.next();
 
             if(actualComm.getMemberList().contains(login)){
                 if(actualComm.getHost().equals(login)){
@@ -685,7 +697,7 @@ public class Operations implements Messages{
                         actualMember.getCommMember().remove(actualComm.getName());
                     }
 
-                    comms.remove();
+                    commIterator.remove();
                 } else{
                     //actualAcc.getCommMember().remove(actualComm.getName());
                     actualComm.getMemberList().remove(login);
