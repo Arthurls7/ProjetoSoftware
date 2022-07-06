@@ -1,9 +1,12 @@
 # ProjetoSoftware
 Disciplina Programação 2 / Projeto de Software em Java
 
-Primeira versão entregue.
+Sistema funcional (primeira versão).
+
 Aplicado conceitos de O.O (segunda versão). 
+
 Analisado os code smells.
+
 Aplicando design patterns e corrigindo code smells (versão atual).
 
 ----------------------------------
