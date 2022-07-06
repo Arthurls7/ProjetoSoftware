@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 public class OpAccount extends GeneralOps{
 
@@ -26,7 +25,7 @@ public class OpAccount extends GeneralOps{
                 return false;
             }
 
-            newAcc = Account.getInstance();
+            newAcc = new Account();
             newAcc.setLogin(input);
 
             System.out.print("Insert password (Len 6-20): ");
@@ -131,12 +130,17 @@ public class OpAccount extends GeneralOps{
             else System.out.println("Member of: " + s);
 
             for(Message msg : loop.getMessages()){
-                if(msg.getSender().equals(login)) System.out.println("Message to comm" + loop.getName() + ": " + msg.getMessage());
+                if(msg.getSender().equals(login)) {
+                    System.out.println(loop.getName() + " - ");
+                    msg.showData();
+                }
+                    //System.out.println("Message to comm" + loop.getName() + ": " + msg.getMessage());
             }
         }
 
         for(Message actual : feed){
-            if(actual.getSender().equals(login)) System.out.println("Feed post: " + actual.getMessage());
+            if(actual.getSender().equals(login)) actual.showData();
+             //System.out.println("Feed post: " + actual.getMessage());
         }
 
         seeMsg(login);
@@ -146,7 +150,11 @@ public class OpAccount extends GeneralOps{
         Account actualAcc = findAcc(login);
         boolean result = false;
         for(PrivateMessage msg : actualAcc.getMessages()){
-            System.out.println(msg.getSender() + " to " + msg.getReceiver() + ": " + msg.getMessage());
+            msg.showSender();
+            System.out.print(" to ");
+            msg.showReceiver();
+            System.out.print(":");
+            msg.showMessage();
             result = true;
         }
 
@@ -347,6 +355,20 @@ public class OpAccount extends GeneralOps{
     public void removeAcc(String login){
         Account actualAcc = findAcc(login);
 
+        removeAccComm(login);
+
+        removeAccMessage(login, actualAcc);
+
+        removeAccFriend(login);
+
+        removeAccFeed(login);
+
+        removeAccInvite(login, actualAcc);
+
+        users.remove(actualAcc);
+    }
+
+    public void removeAccComm(String login){
         //Comm remove ok
         Iterator<Community> commIterator = communities.iterator();
         while(commIterator.hasNext()){
@@ -367,7 +389,9 @@ public class OpAccount extends GeneralOps{
                 }
             }
         }
+    }
 
+    public void removeAccMessage(String login, Account actualAcc){
         //Private messages
         for(PrivateMessage excludeMsg : actualAcc.getMessages()){
             Account friend;
@@ -380,25 +404,31 @@ public class OpAccount extends GeneralOps{
                 friend.getMessages().removeIf(message -> message.getReceiver().equals(login));
             }
         }
+    }
 
-
+    public void removeAccFriend(String login){
         //FriendList
         for (Account actualFriend : users) actualFriend.getFriendList().remove(login);
+    }
 
+    public void removeAccFeed(String login){
         //Feed remove ok
         feed.removeIf(actualFeedPost -> actualFeedPost.getSender().equals(login));
+    }
 
+    public void removeAccInvite(String login, Account actualAcc){
         //Invite remove ok
+        //Received
         for(String inviteRec : actualAcc.getInvites().getInviteRec()){
             Account friendAcc = findAcc(inviteRec);
             friendAcc.getInvites().getInviteSent().remove(login);
         }
+
+        //Sent
         for(String inviteSent : actualAcc.getInvites().getInviteSent()){
             Account friendAcc = findAcc(inviteSent);
             friendAcc.getInvites().getInviteRec().remove(login);
         }
-
-        users.remove(actualAcc);
     }
 
 }

@@ -1,4 +1,4 @@
-public abstract class Message {
+public abstract class Message{
     protected String sender, message;
 
     public Message(String sender, String message){
@@ -13,4 +13,9 @@ public abstract class Message {
     public String getMessage() {
         return message;
     }
+
+    abstract void showMessage();
+    abstract void showSender();
+    abstract void showData();
+
 }

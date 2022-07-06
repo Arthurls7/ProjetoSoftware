@@ -8,23 +8,8 @@ public class Account{
     protected ArrayList<PrivateMessage> messages = new ArrayList<>();
     protected ArrayList<String> commMember = new ArrayList<>();
 
-    private static Account instance = null;
+    public Account(){
 
-    private Account(){
-
-    }
-
-    public Account(String login, String password, String name, String nickname, String description) {
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.nickname = nickname;
-        this.description = description;
-    }
-
-    public static Account getInstance() {
-        if(instance == null) instance = new Account();
-        return instance;
     }
 
     public String getLogin() {

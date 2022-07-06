@@ -14,8 +14,9 @@ public abstract class GeneralOps {
         this.communities = communities;
         this.feed = feed;
     }
+
     public Account findAcc(String login){
-        for(Account user : this.users)
+        for(Account user : users)
             if (user.getLogin().equals(login)) return user;
         return null;
     }

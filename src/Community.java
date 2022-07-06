@@ -6,24 +6,8 @@ public class Community{
     protected ArrayList<CommunityMessage> messages = new ArrayList<>();
     protected ArrayList<String> memberRequest = new ArrayList<>();
 
-    private static Community instance = null;
+    public Community(){
 
-    private Community(){
-
-    }
-
-    public Community(String name, String description, String host) {
-        this.name = name;
-        this.description = description;
-        this.host = host;
-        memberList = new ArrayList<>();
-        messages = new ArrayList<>();
-        memberRequest = new ArrayList<>();
-    }
-
-    public static Community getInstance() {
-        if(instance == null) instance = new Community();
-        return instance;
     }
 
     public String getName() {

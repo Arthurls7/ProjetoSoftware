@@ -9,7 +9,7 @@ public class OpCommunity extends GeneralOps{
 
     public void createComm(String login){
         Community newComm;
-        newComm = Community.getInstance();
+        newComm = new Community();
 
         try{
             String input;

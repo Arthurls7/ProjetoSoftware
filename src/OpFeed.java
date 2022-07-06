@@ -37,7 +37,8 @@ public class OpFeed extends GeneralOps{
             if(actual.getSender().equals(login)) continue;
             if(!actual.isPublic()){
                 Account verifyFriend = findAcc(login);
-                if(verifyFriend.getFriendList().contains(actual.getSender())) System.out.println(actual.getSender() + ": " + actual.getMessage());
+                if(verifyFriend.getFriendList().contains(actual.getSender())) actual.showData();
+                    //System.out.println(actual.getSender() + ": " + actual.getMessage());
             } else System.out.println(actual.getSender() + ": " + actual.getMessage());
         }
     }

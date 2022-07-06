@@ -17,25 +17,6 @@ public class Operations{
         this.opAccount = new OpAccount(users, communities, feed);
         this.opCommunity = new OpCommunity(users, communities, feed);
         this.opFeed = new OpFeed(users, communities, feed);
-
-        Account acc = new Account("arthur", "123", "123", "123", "123");
-        users.add(acc);
-        acc = new Account("arthur2", "123", "123", "123", "123");
-        users.add(acc);
-        acc = new Account("arthur3", "123", "123", "123", "123");
-        users.add(acc);
     }
-
-    //General ops
-
-    //Account area
-
-    //Friend Area
-
-    //Messages
-
-    //Community area
-
-    //Feed
 
 }
