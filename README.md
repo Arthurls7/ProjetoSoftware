@@ -48,4 +48,6 @@ Middleman -> métodos que aumentam a complexidade do código e eram usados apena
 
 Move Method -> métodos de busca que se relacionam de forma fraca com suas classes foram movidos para nossa nova classe GeneralOps (que inclui as nossas operações generalizadas para que as diversas classes (Account, Community, Feed) possam utilizá-las).
 
+Durante o desenvolvimento do projeto também aplicamos muitas vezes o extract method, pois tinhamos vários metódos fazendo diversas funções, então foram partidos em métodos menores e separados de acordo com seu devido objetivo. Resolvendo assim nosso problema de Long Method.
+
 -----
