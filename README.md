@@ -13,21 +13,6 @@ Aplicando design patterns e corrigindo code smells (versão atual).
 
 Design patterns e soluções de smells:
 
-Padrao Singleton:
-
-O padrão de projeto Singleton é um padrão criacional, cujo objetivo é criar apenas uma instância de uma classe e fornecer apenas um ponto global de acesso àquele objeto. 
-
--> Acesso a conta agora é restrito e feito de forma exclusiva, padronizado globalmente.
--> Acesso a comunidade agora tambem eh restrito e feito de forma exclusiva, padronizado globalmente.
--> Ambas classes agora utilizam construtores privados.
-
-Com isso conseguimos buscar facilmente os pontos onde instanciamos as classes essenciais do nosso projeto e ter a manutenção do código de forma mais simples e legível. Resolvendo também o problema em que as contas e comunidades poderiam ser instanciadas de formas diferentes e em lugares aleatórios do código.
-
-Basicamente utilizamos: 
-Uma variável estática privada, que contém a única instância da classe.
-Um construtor privado, de modo a não ser possível instanciá-la de qualquer outro lugar.
-Um método estático público, para retornar a instância única da classe.
-
 -----
 
 Padrão Bridge:
@@ -41,6 +26,18 @@ Foi criado também uma nova classe GeneralOps (com funções gerais de busca e c
 
 -----
 
+Padrão FactoryMethod
+
+Utilizado de forma simples para resolver nosso problema com os tipos de mensagens, utilizando polimorfismo fizemos uma super classe Message, e subclasses PrivateMessage, FeedMessage, CommunityMessage, que herdam da nossa classe Message, e variam nosso método showData(), pois cada classe possui um atributo diferente, e fazendo isso podemos printar a mensagem formatada em qualquer loop do tipo Message (super classe) e teremos a mensagem de qualquer um dos 3 tipos sendo mostrada de forma correta. Utilizamos a linha de pensamento desse design pattern para o polimorfismo  
+
+-----
+
+Aplicação do Extract Method:
+
+Métodos muito grandes fazendo mais do que deveriam, com foco no nosso método de remover, que PERCORRIA TODAS AS CLASSES ESSENCIAIS, partimos ele em 6 métodos, agora facilitando a manutenção e legibilidade do mesmo. Fora isso, alguns métodos extensos e fazendo muitas verificações também foram refeitos em métodos menores.
+
+-----
+
 Smells simples resolvidos: 
 
 Generative especulation -> construtores feitos em várias classes, inclusive na nossa classe principal Account, e os mesmos nunca foram utilizados. Todos foram removidos.
@@ -50,7 +47,5 @@ Inverted booleans -> métodos que sempre tinham que vir com um operador de '!' n
 Middleman -> métodos que aumentam a complexidade do código e eram usados apenas 1 vez ou 2, além desses métodos tinhamos alguns métodos com apenas uma linha, como no caso do método containsSpaces, que poderia ser simplesmente re-escrito quando fosse ser usado no lugar de ser um método. Solucionamos removendo o método containsSpaces e removendo métodos como o seeMsg que era utilizado apenas uma vez em todo o programa, também foi re-escrito para simplicar e ajudar na legibilidade.
 
 Move Method -> métodos de busca que se relacionam de forma fraca com suas classes foram movidos para nossa nova classe GeneralOps (que inclui as nossas operações generalizadas para que as diversas classes (Account, Community, Feed) possam utilizá-las).
-
-Durante o desenvolvimento do projeto também aplicamos muitas vezes o extract method, pois tinhamos vários metódos fazendo diversas funções, então foram partidos em métodos menores e separados de acordo com seu devido objetivo. Resolvendo assim nosso problema de Long Method.
 
 -----
