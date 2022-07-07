@@ -67,4 +67,29 @@ public class Account{
     public Invites getInvites() {
         return invites;
     }
+
+    public Account addLogin(String login){
+        this.login = login;
+        return this;
+    }
+
+    public Account addPassword(String password){
+        this.password = password;
+        return this;
+    }
+
+    public Account addName(String name){
+        this.name = name;
+        return this;
+    }
+
+    public Account addNickname(String nickname){
+        this.nickname = nickname;
+        return this;
+    }
+
+    public Account addDescription(String description){
+        this.description = description;
+        return this;
+    }
 }

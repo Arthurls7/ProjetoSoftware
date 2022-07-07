@@ -10,51 +10,58 @@ public class OpAccount extends GeneralOps{
     //Profile
     public boolean createAcc(){
         Account newAcc;
-        String input;
+        String login, password, name, nickname, description;
 
         try {
             System.out.print("Insert login (Len 6-20, No especial chars, only underscore): ");
-            input = scan.next();
+            login = scan.next();
             //System.out.println(input);
-            if(checkRegex("login", input)) throw new invalidFormatEx("Bad login");
+            if(checkRegex("login", login)) throw new invalidFormatEx("Bad login");
 
             //Validating account
-            newAcc = findAcc(input);
+            newAcc = findAcc(login);
             if(newAcc != null) {
                 System.out.println("Login already exists");
                 return false;
             }
 
             newAcc = new Account();
-            newAcc.setLogin(input);
+            //newAcc.setLogin(input);
 
             System.out.print("Insert password (Len 6-20): ");
-            input = scan.next();
+            password = scan.next();
 
-            if(checkRegex("password", input)) throw new invalidFormatEx("Bad password");
-            newAcc.setPassword(input);
+            if(checkRegex("password", password)) throw new invalidFormatEx("Bad password");
+            //newAcc.setPassword(input);
 
             System.out.print("Insert name (Len 6-30, No especial chars, No especial chars, only spaces): ");
-            input = scan.next();
+            name = scan.next();
 
-            if(checkRegex("name", input)) throw new invalidFormatEx("Bad name");
-            newAcc.setName(input);
+            if(checkRegex("name", name)) throw new invalidFormatEx("Bad name");
+            //newAcc.setName(input);
 
             System.out.print("Insert nickname (Len 6-20, No especial chars, only spaces): ");
-            input = scan.next();
+            nickname = scan.next();
 
-            if(checkRegex("nickname", input)) throw new invalidFormatEx("Bad nickname");
-            newAcc.setNickname(input);
+            if(checkRegex("nickname", nickname)) throw new invalidFormatEx("Bad nickname");
+            //newAcc.setNickname(input);
 
             System.out.print("Insert description (Len 6-40, All chars allowed): ");
-            input = scan.next();
+            description = scan.next();
 
-            if(checkRegex("description", input)) throw new invalidFormatEx("Bad description");
-            newAcc.setDescription(input);
+            if(checkRegex("description", description)) throw new invalidFormatEx("Bad description");
+            //newAcc.setDescription(input);
 
         } catch(invalidFormatEx e) {
             return false;
         }
+
+        newAcc  .addLogin(login)
+                .addPassword(password)
+                .addName(name)
+                .addNickname(nickname)
+                .addDescription(description);
+
 
         users.add(newAcc);
         System.out.println();
@@ -356,13 +363,9 @@ public class OpAccount extends GeneralOps{
         Account actualAcc = findAcc(login);
 
         removeAccComm(login);
-
         removeAccMessage(login, actualAcc);
-
         removeAccFriend(login);
-
         removeAccFeed(login);
-
         removeAccInvite(login, actualAcc);
 
         users.remove(actualAcc);

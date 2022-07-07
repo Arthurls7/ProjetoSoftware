@@ -135,22 +135,19 @@ public class Menu {
 
     public void accountMenuText(){
         System.out.println("\n** ACCOUNT AREA **");
-        System.out.println("a: Edit info    | b: Show data");
-        System.out.println("c: Sent message | d: See private msg's");
+        System.out.println("a: Edit info  |  b: Show data  |  c: Sent message  |  d: See private msg's");
 
         System.out.println("\n** FRIEND AREA **");
-        System.out.println("e: Add a friend | f: Show friends");
-        System.out.println("g: List invites | h: Manage invites");
+        System.out.println("e: Add a friend  |  f: Show friends  |  g: List invites  |  h: Manage invites");
 
         System.out.println("\n** COMMUNITY AREA **");
-        System.out.println("i: New Community    | j: Join community");
-        System.out.println("k: Sent msg to comm | l: See community msg's");
-        System.out.println("m: Manage community");
+        System.out.println("i: New Community  |  j: Join community  |  k: Sent msg to comm  |  " +
+                "l: See community msg's  |  m: Manage community");
 
         System.out.println("\n** FEED SECTION **");
-        System.out.println("n: Post in feed | o: See feed");
+        System.out.println("n: Post in feed  |  o: See feed");
 
         System.out.println("\n** DEAD SECTION **");
-        System.out.println("p: Remove acc | q: Quit (logoff)");
+        System.out.println("p: Remove acc  |  q: Quit (logoff)");
     }
 }
