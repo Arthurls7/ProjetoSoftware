@@ -75,3 +75,9 @@ Métodos muito grandes fazendo mais do que deveriam, com foco no nosso método d
 </p>
 
 -----
+
+Principais commits alterando os patterns:
+
+(https://github.com/Arthurls7/ProjetoSoftware/commit/7bfa77d0dfc4d7aafd472203fd6c59a8f8e4fdc8)
+
+(https://github.com/Arthurls7/ProjetoSoftware/commit/574203cc71adeaeea4045f60df0b33734cc176ab)
