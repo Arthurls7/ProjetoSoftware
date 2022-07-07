@@ -4,8 +4,11 @@
 </p>
 
 Sistema funcional (primeira versão).
+
 Aplicado conceitos de O.O (segunda versão). 
+
 Analisado os code smells (apenas análise).
+
 Aplicado design patterns e corrigindo code smells (versão atual).
 
 ----------------------------------
@@ -25,9 +28,6 @@ Move Method -> métodos de busca que se relacionam de forma fraca com suas class
 
 -----
 
-
------
-
 Padrão Bridge:
 
 Resolvendo nosso problema da large class de operações com mais de 700 linhas, resolvemos utilizar subclasses que se relacionariam mais com as funções de cada tipo, conta, comunidade e feed, e não deixando essas funções numa única classe gerenciando todas as operações do projeto.
@@ -41,7 +41,7 @@ Facilitando manutenção, legibilidade e resolvendo o nosso code smell. O foco f
 
 Classe base da aplicação (classe de operações gerais):
 <p align="center">
-    <img width="200" src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/BridgeExample.png" alt="Bridge Example">
+    <img src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/BridgeExample.png" alt="Bridge Example">
 </p>
 
 -----
@@ -51,7 +51,7 @@ Padrão Builder
 Utilizado para resolver nosso smell de código duplicado encontrado na nossa função de criar um objeto de conta e definir seus atributos, o padrão builder tem como objetivo eliminar a complexidade na criação de objetos e também deixar esse processo mais intuitivo. Com isso conseguimos poupar várias linhas de código e o deixar mais legível, um exemplo de onde aplicamos o padrão:
 
 <p align="center">
-  <img width="200" src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/BuilderExample.png" alt="Builder Example">
+  <img src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/BuilderExample.png" alt="Builder Example">
 </p>
 
 -----
@@ -61,7 +61,7 @@ Padrão FactoryMethod
 Utilizado de forma simples para resolver nosso problema com os tipos de mensagens, utilizando polimorfismo fizemos uma super classe Message, e subclasses PrivateMessage, FeedMessage, CommunityMessage, que herdam da nossa classe Message, e variam nosso método showData(), pois cada classe possui um atributo diferente, e fazendo isso podemos printar a mensagem formatada em qualquer loop do tipo Message (super classe) e teremos a mensagem de qualquer um dos 3 tipos sendo mostrada de forma correta. Utilizamos a linha de pensamento desse design pattern para o polimorfismo.
 
 <p align="center">
-  <img width="200" src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/FactoryExample.png" alt="Factory Example">
+  <img src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/FactoryExample.png" alt="Factory Example">
 </p>
 
 -----
@@ -71,7 +71,7 @@ Aplicação do Extract Method:
 Métodos muito grandes fazendo mais do que deveriam, com foco no nosso método de remover, que PERCORRIA TODAS AS CLASSES ESSENCIAIS, partimos ele em 6 métodos, agora facilitando a manutenção e legibilidade do mesmo. Fora isso, alguns métodos extensos e fazendo muitas verificações também foram refeitos em métodos menores.
 
 <p align="center">
-  <img width="200" src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/ExtractMethodExample.png" alt="Extract Method Example">
+  <img src="https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/ExtractMethodExample.png" alt="Extract Method Example">
 </p>
 
 -----
