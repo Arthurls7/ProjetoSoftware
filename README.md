@@ -32,6 +32,10 @@ Padrão Builder
 
 Utilizado para resolver nosso smell de código duplicado encontrado na nossa função de criar um objeto de conta e definir seus atributos, o padrão builder tem como objetivo eliminar a complexidade na criação de objetos e também deixar esse processo mais intuitivo. Com isso conseguimos poupar várias linhas de código e o deixar mais legível como podemos ver abaixo:
 
+<p align="center">
+    (https://github.com/Arthurls7/ProjetoSoftware/blob/main/imgs/BuilderExample.png)
+</p>
+
 -----
 
 Padrão FactoryMethod
